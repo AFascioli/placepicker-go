@@ -1,6 +1,6 @@
 import renderLocation from './components/location.js';
 
-export default function renderLocationsPage(availableLocations, interestingLocations) {
+export default function renderLocationsPage(suggestedLocations, availableLocations, interestingLocations) {
   return `
     <!DOCTYPE html>
     <html>
@@ -9,18 +9,25 @@ export default function renderLocationsPage(availableLocations, interestingLocat
         <link rel="stylesheet" href="/main.css" />
         <link rel="icon" href="/logo.png" />
         <script src="/htmx.js" defer></script>
+        <script src="/main.js" defer></script>
       </head>
       <body>
         <header>
           <img src="/logo.png" alt="Stylized globe" />
           <h1>PlacePicker</h1>
           <p>
-            Create your personal collection of places you would like to visit or
-            you have visited.
+            Create your collection of places you would like to visit or you have visited.
           </p>
         </header>
         <main>
-          <section class="locations-category">
+          <section id="suggested-locations-section">
+            <h2>Currently suggested locations</h2>
+            <ul id="suggested-locations" class="locations">
+              ${suggestedLocations.map((location) => renderLocation(location)).join('')}
+            </ul>
+          </section>
+
+          <section id="int-locations-section" class="locations-category">
             <h2>My Dream Locations</h2>
             <ul id="interesting-locations" class="locations">
               ${interestingLocations.map((location) => renderLocation(location, false)).join('')}
