@@ -9,9 +9,10 @@ export default function renderLocationsPage(suggestedLocations, availableLocatio
         <link rel="stylesheet" href="/main.css" />
         <link rel="icon" href="/logo.png" />
         <script src="/htmx.js" defer></script>
+        <script src="/htmx-debug.js" defer></script>
         <script src="/main.js" defer></script>
       </head>
-      <body>
+      <body hx-ex="debug">
         <header>
           <img src="/logo.png" alt="Stylized globe" />
           <h1>PlacePicker</h1>
@@ -22,7 +23,12 @@ export default function renderLocationsPage(suggestedLocations, availableLocatio
         <main>
           <section id="suggested-locations-section">
             <h2>Currently suggested locations</h2>
-            <ul id="suggested-locations" class="locations">
+            <ul 
+              id="suggested-locations" 
+              class="locations"
+              hx-get="/suggested-locations"
+              hx-trigger="every 5s"
+              >
               ${suggestedLocations.map((location) => renderLocation(location)).join('')}
             </ul>
           </section>

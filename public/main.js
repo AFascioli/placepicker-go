@@ -1,4 +1,9 @@
+// console.log(htmx)
+// htmx.config.defaultSwapStyle = "outerHTML"
+// htmx.logAll();
+
 function showConfirmationModal(event) {
+    if (event.detail.path === '/suggested-locations') return
     event.preventDefault() // not actually cancels the event, because we are listening to htmx:confirm 
     const action = event.detail.elt.dataset.action
     const confirmationModal = `
